@@ -1,0 +1,14 @@
+zenml
+mlflow
+dvc
+scikit-learn
+xgboost
+lightgbm
+shap
+fastapi
+streamlit
+pandas
+numpy
+pyyaml
+python-box
+ensure
