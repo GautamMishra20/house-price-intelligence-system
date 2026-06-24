@@ -2,6 +2,8 @@ from src.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH, SCHEMA_FILE_PATH
 from src.utils.common import read_yaml, create_directories
 from src.entity.config_entity import DataIngestionConfig
 from pathlib import Path
+from src.entity.config_entity import DataValidationConfig
+
 
 class ConfigurationManager:
     def __init__(self,
@@ -21,4 +23,17 @@ class ConfigurationManager:
             root_dir=Path(config.root_dir),
             source_data_path=Path(config.source_data_path),
             ingested_data_path=Path(config.ingested_data_path),
+        )
+        
+    def get_data_validation_config(self) -> DataValidationConfig:
+        config = self.config.data_validation
+        schema = self.schema
+        
+        create_directories([config.root_dir])
+        
+        return DataValidationConfig(
+            root_dir=Path(config.root_dir),
+            data_path=Path(config.data_path),
+            status_file=Path(config.status_file),
+            all_schema=schema,
         )
