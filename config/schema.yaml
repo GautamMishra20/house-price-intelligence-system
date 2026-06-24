@@ -1,0 +1,34 @@
+COLUMNS:
+  area_type: object
+  availability: object
+  location: object
+  size: object
+  society: object
+  total_sqft: object
+  bath: float64
+  balcony: float64
+  price: float64
+
+TARGET_COLUMN:
+  name: price
+
+EXPECTED_SHAPE:
+  rows: 13320
+  columns: 9
+
+NULLABLE_COLUMNS:
+  # Columns where missing values are expected and should NOT fail validation.
+  # Confirmed from actual dataset null counts (2026-06-24).
+  - location # 1 null
+  - size # 16 nulls
+  - society # 5502 nulls - high missingness, candidate to drop in feature engineering
+  - bath # 73 nulls
+  - balcony # 609 nulls
+
+NON_NULLABLE_COLUMNS:
+  # Columns confirmed to have zero nulls in the raw dataset - validation
+  # should flag an error if any of these contain nulls after ingestion.
+  - area_type
+  - availability
+  - total_sqft
+  - price
