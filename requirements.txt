@@ -12,3 +12,5 @@ numpy
 pyyaml
 python-box
 ensure
+dvc
+dvc[gdrive]
